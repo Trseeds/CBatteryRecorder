@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int CloseFile(FILE* pFile)
+{
+    fclose(pFile);
+    return(0);
+}
+
 int CheckFile(char* pFilename)
 {
     FILE* pCheck = fopen(pFilename,"r");
@@ -46,12 +52,6 @@ int DeleteFileNW(char* pFilename)
     {
         return(1);
     }
-    return(0);
-}
-
-int CloseFile(FILE* pFile)
-{
-    fclose(pFile);
     return(0);
 }
 
