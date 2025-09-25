@@ -2,7 +2,12 @@ import pandas
 import plotly.express as plotly
 import sys
 
-df = pandas.read_csv(sys.argv[1], header=None, names=['time', 'percentage'])
+if len(sys.argv) < 2:
+    CSVFile = input("CSV File:\n")
+else:
+    CSVFile = sys.argv[1]
+
+df = pandas.read_csv(CSVFile, header=None, names=['time', 'percentage'])
 df['percentage'] = df['percentage'].str.replace('%', '').astype(float)
 df['time'] = pandas.to_datetime(df['time'], format='%I:%M:%S %p')
 fig = plotly.line(df, x='time', y='percentage', title='Battery Level Over Time')
