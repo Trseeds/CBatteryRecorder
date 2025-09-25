@@ -59,9 +59,10 @@ int main()
     char FinalString[128];
     char UserChoice[3];
     char WorkingSymbols[] = {'\\','|','/','-'};
+    
+    puts("Charge test (1) or discharge test? (2)\nNote that this only changes when the test stops and where it saves.");
     while (1)
     {
-        puts("Charge test (1) or discharge test? (2)\nNote that this only changes when the test stops and where it saves.");
         fgets(UserChoice, 3, stdin);
         if (UserChoice[0] == '1' || UserChoice[0] == '2')
         {
@@ -69,7 +70,7 @@ int main()
         }
         else
         {
-            puts("\n\n\nInvalid selection.\n\n");
+            puts("\nInvalid selection.");
         }
     }
     if (UserChoice[0] == '1')
@@ -82,7 +83,7 @@ int main()
         ExitPercentage = 10;
         sprintf(DesiredFile,"discharge.csv");
     }
-    DeleteFileNW(DesiredFile);
+    FhDeleteFile(DesiredFile);
     for(int i = 0; i < 40; i++)
     {
         Percentage = GetBatteryPercentage();
@@ -90,7 +91,7 @@ int main()
         {
             GetTimeString(Time);
             sprintf(FinalString, "%s, %d%%\n",Time,Percentage);
-            int res = AppendFile(DesiredFile, FinalString);
+            int res = FhAppendFile(DesiredFile, FinalString);
             if (res != 0)
             {
                 printf("File error with file %s",DesiredFile);

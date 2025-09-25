@@ -3,11 +3,11 @@
 
 #include <stdio.h>
 
-int CloseFile(FILE* pFile);
-int CheckFile(char* pFilename);
-int MakeFile(char* pFilename);
-FILE* OpenFileNW(char* pFilename);
-int DeleteFileNW(char* pFilename);
-int AppendFile(char* pFilename, char* pText);
+int FhCloseFile(FILE* pFile);
+int FhCheckFile(char* pFilename);
+int FhMakeFile(char* pFilename);
+FILE* FhOpenFile(char* pFilename);
+int FhDeleteFile(char* pFilename);
+int FhAppendFile(char* pFilename, char* pText);
 
 #endif

@@ -1,39 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int CloseFile(FILE* pFile)
+int FhCloseFile(FILE* pFile)
 {
     fclose(pFile);
     return(0);
 }
 
-int CheckFile(char* pFilename)
+int FhCheckFile(char* pFilename)
 {
     FILE* pCheck = fopen(pFilename,"r");
     if (pCheck == NULL)
     {
         return(1);
     }
-    CloseFile(pCheck);
+    FhCloseFile(pCheck);
     return(0);
 }
 
-int MakeFile(char* pFilename)
+int FhMakeFile(char* pFilename)
 {
     FILE* pNewFile = fopen(pFilename, "w+");
     if (pNewFile == NULL)
     {
         return(1);
     }
-    CloseFile(pNewFile);
+    FhCloseFile(pNewFile);
     return(0);
 }
 
-FILE* OpenFileNW(char* pFilename) //NW stands for Non-Windows. Thanks Windows.h!
+FILE* FhOpenFile(char* pFilename)
 {
-    if (CheckFile(pFilename) != 0)
+    if (FhCheckFile(pFilename) != 0)
     {
-        if (MakeFile(pFilename) != 0)
+        if (FhMakeFile(pFilename) != 0)
         {
             return(NULL);
         }
@@ -46,7 +46,7 @@ FILE* OpenFileNW(char* pFilename) //NW stands for Non-Windows. Thanks Windows.h!
     return(pNewFile);
 }
 
-int DeleteFileNW(char* pFilename)
+int FhDeleteFile(char* pFilename)
 {
     if (remove(pFilename) != 0)
     {
@@ -55,14 +55,14 @@ int DeleteFileNW(char* pFilename)
     return(0);
 }
 
-int AppendFile(char* pFilename, char* pText)
+int FhAppendFile(char* pFilename, char* pText)
 {
-    FILE* pFile = OpenFileNW(pFilename);
+    FILE* pFile = FhOpenFile(pFilename);
     if (pFile == NULL)
     {
         return(1);
     }
     fprintf(pFile, pText);
-    CloseFile(pFile);
+    FhCloseFile(pFile);
     return(0);
 }
